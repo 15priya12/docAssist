@@ -1,7 +1,6 @@
 import streamlit as st
 import os
 import tempfile
-from dotenv import load_dotenv
 import pandas as pd
 
 from langchain.document_loaders import PyPDFLoader
@@ -10,8 +9,6 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings, GoogleGenerativ
 from langchain.vectorstores import Chroma
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.prompts import ChatPromptTemplate
-
-load_dotenv()
 
 def get_api_key():
     api_key = os.environ.get("GEMINI_API_KEY")
@@ -25,7 +22,6 @@ def get_embedding(api_key):
         google_api_key=api_key
     )
     return embeddings
-
 
 def process_document(uploaded_file, api_key):
     with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as tmp_file:
